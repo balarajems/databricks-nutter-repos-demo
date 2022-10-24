@@ -51,11 +51,18 @@ class TestFixtureArbitraryFiles(NutterFixture):
     read_covid19_data(df)
     
   def assertion_covid19_metrics(self):
-    cols = ["Deaths", "Country_Region"]
-    rows = [("5", "Canada"), ("15", "USA"), ("20", "Italy")]
+    cols = ["Deaths", "Country_Region", "Updated"]
+    rows = [
+        ("5", "Canada", "2020-01-26"),
+        ("15", "USA", "2020-01-26"),
+        ("20", "Italy", "2020-01-26"),
+        ("10", "Canada", "2020-02-26"),
+        ("50", "USA", "2020-02-26"), 
+        ("25", "Italy", "2020-02-26")
+    ]
     df = spark.createDataFrame(rows, cols)
     result = read_covid19_data(df)
-    assert (result["Canada"] == 5)
+    assert (result["Canada"] == 15)
 
   def after_code2_arbitrary_files(self):
     spark.sql(f"drop table {self.code2_table_name}")
