@@ -23,7 +23,7 @@ class TestFixtureArbitraryFiles(NutterFixture):
     self.code2_table_name = "my_data"
     self.code1_view_name = "my_cool_data"
     self.covid19_table_name = "covid19"
-    self.covid19_num_entries = 2126
+    self.covid19_num_entries = 2127
     self.code1_num_entries = 100
     NutterFixture.__init__(self)
     
