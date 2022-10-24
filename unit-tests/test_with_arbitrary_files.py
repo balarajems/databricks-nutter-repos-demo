@@ -24,7 +24,7 @@ class TestFixtureArbitraryFiles(NutterFixture):
     self.code1_view_name = "my_cool_data"
     self.covid19_table_name = "covid19"
     # spark = SparkSession.builder.appName('Covid19 Metrics').getOrCreate()
-    self.covid19_num_entries = 2127
+    # self.covid19_num_entries = 2127
     self.code1_num_entries = 100
     NutterFixture.__init__(self)
     
@@ -45,10 +45,11 @@ class TestFixtureArbitraryFiles(NutterFixture):
 
   def run_covid19_metrics(self):
     # covid19_df = spark.read.format("csv").option("header", "true").load("dbfs:/FileStore/tables/covid19.csv")
-    cols = ["Deaths", "Country_Region"]
-    rows = [("5", "Canada"), ("15", "USA"), ("20", "Italy")]
-    df = spark.createDataFrame(rows, cols)
-    read_covid19_data(df)
+    # cols = ["Deaths", "Country_Region"]
+    # rows = [("5", "Canada"), ("15", "USA"), ("20", "Italy")]
+    # df = spark.createDataFrame(rows, cols)
+    # read_covid19_data(df)
+    pass
     
   def assertion_covid19_metrics(self):
     cols = ["Deaths", "Country_Region", "Updated"]
@@ -62,7 +63,6 @@ class TestFixtureArbitraryFiles(NutterFixture):
     ]
     df = spark.createDataFrame(rows, cols)
     result = read_covid19_data(df)
-    print(f"result: {result}")
     assert (result["Canada"] == 15)
 
   def after_code2_arbitrary_files(self):
