@@ -23,6 +23,7 @@ class TestFixtureArbitraryFiles(NutterFixture):
     self.code2_table_name = "my_data"
     self.code1_view_name = "my_cool_data"
     self.covid19_table_name = "covid19"
+    # spark = SparkSession.builder.appName('Covid19 Metrics').getOrCreate()
     self.covid19_num_entries = 2127
     self.code1_num_entries = 100
     NutterFixture.__init__(self)
@@ -43,7 +44,8 @@ class TestFixtureArbitraryFiles(NutterFixture):
     assert (first_row[0] == 10)
 
   def run_covid19_metrics(self):
-    read_covid19_data()
+    covid19_df = spark.read.format("csv").option("header", "true").load("dbfs:/FileStore/tables/covid19.csv")
+    read_covid19_data(covid19_df)
     
   def assertion_covid19_metrics(self):
     df = spark.read.table(self.covid19_table_name)
