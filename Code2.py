@@ -22,8 +22,8 @@ def read_covid19_data(df):
 
 # Calling the read_covid19_data function
 
-# spark = SparkSession.builder.appName('Covid19 Metrics').getOrCreate()
-# covid19_df = spark.read.format("csv").option("header", "true").load("dbfs:/FileStore/tables/covid19.csv")
+spark = SparkSession.builder.appName('Covid19 Metrics').getOrCreate()
+covid19_df = spark.read.format("csv").option("header", "true").load("dbfs:/FileStore/tables/covid19.csv")
 
-# result = read_covid19_data(covid19_df)
-# print(result)
+result = read_covid19_data(covid19_df)
+print(result)
