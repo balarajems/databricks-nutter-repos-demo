@@ -44,12 +44,18 @@ class TestFixtureArbitraryFiles(NutterFixture):
     assert (first_row[0] == 10)
 
   def run_covid19_metrics(self):
-    covid19_df = spark.read.format("csv").option("header", "true").load("dbfs:/FileStore/tables/covid19.csv")
-    read_covid19_data(covid19_df)
+    # covid19_df = spark.read.format("csv").option("header", "true").load("dbfs:/FileStore/tables/covid19.csv")
+    cols = ["Deaths", "Country_Region"]
+    rows = [("5", "Canada"), ("15", "USA"), ("20", "Italy")]
+    df = spark.createDataFrame(rows, cols)
+    read_covid19_data(df)
     
   def assertion_covid19_metrics(self):
-    df = spark.read.table(self.covid19_table_name)
-    assert(df.count() == self.covid19_num_entries)
+    cols = ["Deaths", "Country_Region"]
+    rows = [("5", "Canada"), ("15", "USA"), ("20", "Italy")]
+    df = spark.createDataFrame(rows, cols)
+    result = read_covid19_data(df)
+    assert (result["Canada"] == 5)
 
   def after_code2_arbitrary_files(self):
     spark.sql(f"drop table {self.code2_table_name}")
