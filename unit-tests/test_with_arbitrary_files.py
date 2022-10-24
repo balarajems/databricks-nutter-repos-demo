@@ -63,7 +63,7 @@ class TestFixtureArbitraryFiles(NutterFixture):
     ]
     df = spark.createDataFrame(rows, cols)
     result = read_covid19_data(df)
-    assert (result["Canada"] == 15)
+    assert (result["USA"] == 65)
 
   def after_code2_arbitrary_files(self):
     spark.sql(f"drop table {self.code2_table_name}")
