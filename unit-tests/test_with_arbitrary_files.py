@@ -22,6 +22,8 @@ class TestFixtureArbitraryFiles(NutterFixture):
   def __init__(self):
     self.code2_table_name = "my_data"
     self.code1_view_name = "my_cool_data"
+    self.covid19_table_name = "covid19"
+    self.covid19_num_entries = 2126
     self.code1_num_entries = 100
     NutterFixture.__init__(self)
     
@@ -39,6 +41,13 @@ class TestFixtureArbitraryFiles(NutterFixture):
     some_tbl = spark.sql(f'SELECT COUNT(*) AS total FROM {self.code2_table_name}')
     first_row = some_tbl.first()
     assert (first_row[0] == 10)
+
+  def run_covid19_metrics(self):
+    read_covid19_data()
+    
+  def assertion_covid19_metrics(self):
+    df = spark.read.table(self.covid19_table_name)
+    assert(df.count() == self.covid19_num_entries)
 
   def after_code2_arbitrary_files(self):
     spark.sql(f"drop table {self.code2_table_name}")
