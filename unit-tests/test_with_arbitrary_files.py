@@ -23,6 +23,7 @@ class TestFixtureArbitraryFiles(NutterFixture):
     self.code2_table_name = "my_data"
     self.code1_view_name = "my_cool_data"
     self.covid19_table_name = "covid19"
+    # spark = SparkSession.builder.appName('Covid19 Metrics').getOrCreate()
     # self.covid19_num_entries = 2127
     self.code1_num_entries = 100
     NutterFixture.__init__(self)
@@ -61,13 +62,8 @@ class TestFixtureArbitraryFiles(NutterFixture):
         ("25", "Italy", "2020-02-26")
     ]
     df = spark.createDataFrame(rows, cols)
-    covid19_df = spark.read.format("csv").option("header", "true").load("dbfs:/FileStore/tables/covid19.csv")
-
-  
-    # result = read_covid19_data(covid19_df)
-    # assert (result["Italy"] == 45)
-    result = read_covid19_data(covid19_df)
-    assert (result["France"] == 16100570)
+    result = read_covid19_data(df)
+    assert (result["Italy"] == 45)
 
   def after_code2_arbitrary_files(self):
     spark.sql(f"drop table {self.code2_table_name}")
