@@ -8,7 +8,7 @@ def generate_data2(table_name="my_data"):
 
 
 def read_covid19_data(df):
-    df.printSchema()
+    # covid19_df.printSchema()
     rows_data = df.collect()
     deaths_by_country = {}
     
@@ -22,12 +22,8 @@ def read_covid19_data(df):
 
 # Calling the read_covid19_data function
 
-spark = SparkSession.builder.appName('Covid19 Metrics').getOrCreate()
-covid19_df = spark.read.format("csv").option("header", "true").load("dbfs:/FileStore/tables/covid19.csv")
+# spark = SparkSession.builder.appName('Covid19 Metrics').getOrCreate()
+# covid19_df = spark.read.format("csv").option("header", "true").load("dbfs:/FileStore/tables/covid19.csv")
 
-result = read_covid19_data(covid19_df)
-print(result)
-
-# COMMAND ----------
-
-
+# result = read_covid19_data(covid19_df)
+# print(result)
