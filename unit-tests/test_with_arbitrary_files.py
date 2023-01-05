@@ -10,6 +10,9 @@
 
 from my_package.code1 import * # instead of %run ./Code1
 from my_package.code2 import * # instead of %run ./Code2
+from my_package.metrics import * # instead of %run ./Code2
+
+
 
 # COMMAND ----------
 
