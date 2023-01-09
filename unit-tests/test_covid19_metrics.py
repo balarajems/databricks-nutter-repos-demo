@@ -59,3 +59,9 @@ if is_job:
 # COMMAND ----------
 
 
+print("Test node command")
+
+# COMMAND ----------
+
+
+print("Another test node command")
